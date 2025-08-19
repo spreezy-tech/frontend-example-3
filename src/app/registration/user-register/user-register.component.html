@@ -1,0 +1,29 @@
+<p>User name is : {{ name }}</p>
+<button (click)="updateName()">Click Me!</button>
+
+<!-- <img [src]="imgUrl" /> -->
+
+<div *ngFor = "let employee of employees; let i = index;">
+    <div *ngIf = "employee.isVisible">
+        <p>Name: {{employee.name}}</p>    
+        <p>Age: {{ employee.age }}</p>    
+        <p>Salary: {{ employee.salary }}</p>
+        <button (click)="toggleVisibility(i)">Toggle Visibility</button>
+    </div>
+</div>
+
+<div>
+    <input [(ngModel)]="username" placeholder="Enter your name" />
+    <p>Hello! {{ username }}</p>
+</div>
+
+
+<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <label for="name">Name :</label>
+    <input type="text" id="name" [(ngModel)] = "user.name" #name="ngModel" required name="username">
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" [(ngModel)] = "user.email" #email="ngModel" required name="useremail">
+
+    <button type="submit">Register</button>
+</form>

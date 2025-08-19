@@ -1,0 +1,17 @@
+<h1>Book a Table</h1>
+
+<form [formGroup]="bookingDetails" (ngSubmit)="captureBookingDetails()">
+    <label>Booking Date : </label>
+    <input id="bname" type="text" [formControl]="bookingDetails.controls.bookingDate"/>
+    <br/>
+
+    <label>Booking Time : </label>
+    <input id="btime" type="text" [formControl]="bookingDetails.controls.bookingTime"/>
+    <br/>
+
+    <label>No of people : </label>
+    <input id="headcount" type="number" [formControl]="bookingDetails.controls.headCount"/>
+    <br/>
+
+    <button type="submit">Book</button>
+</form>
