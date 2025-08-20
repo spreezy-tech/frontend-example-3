@@ -14,9 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     BookingRoutingModule,
     ReactiveFormsModule
-  ],
-  exports: [
-    BookTableComponent
   ]
 })
 export class BookingModule { }

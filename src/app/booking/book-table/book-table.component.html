@@ -1,6 +1,10 @@
 <h1>Book a Table</h1>
 
 <form [formGroup]="bookingDetails" (ngSubmit)="captureBookingDetails()">
+    <label>Email : </label>
+    <input id="bemail" type="text" [formControl]="bookingDetails.controls.email"/>
+    <br/>
+    
     <label>Booking Date : </label>
     <input id="bname" type="text" [formControl]="bookingDetails.controls.bookingDate"/>
     <br/>
