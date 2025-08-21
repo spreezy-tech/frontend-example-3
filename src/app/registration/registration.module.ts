@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { RegistrationRoutingModule } from './registration-routing.module';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BusinessRegisterComponent } from './business-register/business-register.component';
 
 
 @NgModule({
   declarations: [
-    UserRegisterComponent
+    UserRegisterComponent,
+    BusinessRegisterComponent
   ],
   imports: [
     CommonModule,
