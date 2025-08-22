@@ -4,12 +4,7 @@
 <!-- <img [src]="imgUrl" /> -->
 
 <div *ngFor = "let employee of employees; let i = index;">
-    <div *ngIf = "employee.isVisible">
-        <p>Name: {{employee.name}}</p>    
-        <p>Age: {{ employee.age }}</p>    
-        <p>Salary: {{ employee.salary }}</p>
-        <button (click)="toggleVisibility(i)">Toggle Visibility</button>
-    </div>
+    <app-employee [employee] = "employee"></app-employee>
 </div>
 
 <div>

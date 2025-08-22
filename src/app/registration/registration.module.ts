@@ -5,12 +5,14 @@ import { RegistrationRoutingModule } from './registration-routing.module';
 import { UserRegisterComponent } from './user-register/user-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BusinessRegisterComponent } from './business-register/business-register.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 
 @NgModule({
   declarations: [
     UserRegisterComponent,
-    BusinessRegisterComponent
+    BusinessRegisterComponent,
+    EmployeeComponent
   ],
   imports: [
     CommonModule,

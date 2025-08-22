@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RegisterService } from '../services/register.service';
 import { NgForm } from '@angular/forms';
+import { EmployeeDetails } from '../model/employee-details';
 
 @Component({
   selector: 'app-user-register',
@@ -19,7 +20,7 @@ export class UserRegisterComponent {
     email : ''
   };
 
-  employees = [
+  employees : EmployeeDetails[] = [
     { name: 'Ved', age: 25, salary: 50000, isVisible: true },
     { name: 'Poojita', age: 30, salary: 60000, isVisible: true },
     { name: 'Kaivallya', age: 28, salary: 55000, isVisible: true }
