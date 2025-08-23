@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
 
+  randomNumberSender !: Observable<number>;
   constructor() { }
 
 
   sample(): void {
     console.log("Dependency injection example");
+  }
+
+  generateRandomNumber() : void {
+    this.randomNumberSender = new Observable(sender => sender.next(Math.random()));
   }
 
 
