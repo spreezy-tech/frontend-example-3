@@ -1,16 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { BookingRequest } from '../models/booking-request';
 import { BookingService } from '../services/booking-service.service';
+import { RegisterService } from 'src/app/registration/services/register.service';
 
 @Component({
   selector: 'app-book-table',
   templateUrl: './book-table.component.html',
   styleUrls: ['./book-table.component.css']
 })
-export class BookTableComponent {
+export class BookTableComponent{
 
   bookingRequest !: BookingRequest;
+  currentNumberObservable : number = 0;
+  currentNumberSubject : number = 0;
 
   bookingDetails = this.formBuilder.group({
     email: new FormControl<string>('', [Validators.required, Validators.email]),
@@ -19,7 +22,10 @@ export class BookTableComponent {
     headCount: new FormControl<number>(0)
   });
 
-  constructor(private formBuilder : FormBuilder, private bookingService : BookingService){}
+  constructor(private formBuilder : FormBuilder, private bookingService : BookingService, private registerService : RegisterService){
+    this.registerService.randomNumberSender?.subscribe(value => this.currentNumberObservable = value);
+    this.registerService.randomNumberSubject.subscribe(value => this.currentNumberSubject = value);
+  }
   
   captureBookingDetails() : void {
     console.log(this.bookingDetails);
@@ -30,5 +36,10 @@ export class BookTableComponent {
       // this.bookingRequest.headCount = this.bookingDetails.value.headCount;
       this.bookingService.createBooking(this.bookingRequest);
     }
+  }
+
+
+  updateValue() : void {
+    
   }
 }

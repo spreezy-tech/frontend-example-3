@@ -3,6 +3,7 @@ import { RegisterService } from '../services/register.service';
 import { NgForm } from '@angular/forms';
 import { EmployeeDetails } from '../model/employee-details';
 import { Router } from '@angular/router';
+import { RegistrationRequest } from '../model/registration-request';
 
 @Component({
   selector: 'app-user-register',
@@ -14,7 +15,10 @@ export class UserRegisterComponent {
   name: string = 'Sarthak';
   imgUrl: string =  'https://nextgen-images.cdn.dealersolutions.com.au/modular.multisite.dealer.solutions/wp-content/uploads/sites/1587/2020/08/31144918/Multi-Colour-Coupe-1200x675.jpg?format=webp&width=1200';
   username : string = ''; 
-  currentNumberReceiver : number = 0;
+  currentNumberObservable : number = 0;
+  currentNumberSubject : number = 0;
+  apiResponse : string = "";
+  request !: RegistrationRequest;
   // registerService: RegisterService = new RegisterService();
 
   user = {
@@ -31,6 +35,8 @@ export class UserRegisterComponent {
   constructor(private registerService: RegisterService, private router :Router) {
     this.name = 'Ved';
     registerService.sample();
+    this.registerService.randomNumberSender?.subscribe(value => this.currentNumberObservable = value);
+    this.registerService.randomNumberSubject.subscribe(value => this.currentNumberSubject = value);
   }
 
   updateName() : void {
@@ -55,7 +61,48 @@ export class UserRegisterComponent {
 
   updateRandomNumber() : void {
     this.registerService.generateRandomNumber();
-    this.registerService.randomNumberSender?.subscribe(value => this.currentNumberReceiver = value);
+    
+  }
+
+  triggerAPI() : void {
+    // this.apiResponse = this.registerService.getText();
+    // console.log(this.apiResponse);
+
+    this.registerService.getText()
+    .subscribe({
+      next: (response) => {
+        console.log("API response : " + response);
+        this.apiResponse = response;
+      },
+      error: (err) => {
+        console.log("Error : "+err);
+      },
+      complete: () => {
+        console.log("API call completed");
+      }
+    });
+  }
+
+  createAPI() : void {
+    this.request = new RegistrationRequest();
+    this.request.name = "Sarthak";
+    this.request.email = "abc@xyz.com";
+    this.request.phoneNumber = "1234567890";
+    this.request.password = "sample456";
+
+    this.registerService.sendDetails(this.request)
+    .subscribe({
+      next: (response) => {
+        console.log("API response : " + response.operation + " " + response.success);
+        this.apiResponse = response.operation;
+      },
+      error: (err) => {
+        console.log("Error : "+err);
+      },
+      complete: () => {
+        console.log("API call completed");
+      }
+    });
   }
 
 

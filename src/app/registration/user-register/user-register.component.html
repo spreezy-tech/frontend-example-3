@@ -1,22 +1,29 @@
-<p>User name is : {{ name }}</p>
-<button (click)="updateName()">Click Me!</button>
+<!-- <p>User name is : {{ name }}</p>
+<button (click)="updateName()">Click Me!</button> -->
 
 <!-- <img [src]="imgUrl" /> -->
 
-<div *ngFor = "let employee of employees; let i = index;">
+<!-- <div *ngFor = "let employee of employees; let i = index;">
     <app-employee [employee] = "employee" (visibilityEvent)="receiveEvent(employee)"></app-employee>
-</div>
+</div> -->
 
-<div>
+<!-- <div>
     <input [(ngModel)]="username" placeholder="Enter your name" />
     <p>Hello! {{ username }}</p>
-</div>
-
-<p>Current Random Number: {{currentNumberReceiver}}</p>
-<button (click)="updateRandomNumber()">Update Value</button>
+</div> -->
 
 
-<form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+<h1>user Register Component</h1>
+<button (click)="updateRandomNumber()">Generate Number</button>
+<p>Current Random Number from Observable in UserRegisterComponent: {{currentNumberObservable}}</p>
+<p>Current Random Number from Subject in UserRegisterComponent: {{currentNumberSubject}}</p>
+
+
+<button (click)="createAPI()">API call</button>
+<p>API response : {{apiResponse}}</p>
+
+
+<!-- <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
     <label for="name">Name :</label>
     <input type="text" id="name" [(ngModel)] = "user.name" #name="ngModel" required name="username">
 
@@ -24,4 +31,4 @@
     <input type="email" id="email" [(ngModel)] = "user.email" #email="ngModel" required name="useremail">
 
     <button type="submit">Register</button>
-</form>
+</form> -->

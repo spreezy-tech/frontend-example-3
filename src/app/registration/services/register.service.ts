@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { RegistrationRequest } from '../model/registration-request';
+import { RegistrationResponse } from '../model/registration-response';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +10,11 @@ import { Observable } from 'rxjs';
 export class RegisterService {
 
   randomNumberSender !: Observable<number>;
-  constructor() { }
+  randomNumberSubject = new BehaviorSubject<number>(5);
+
+  constructor(private http : HttpClient) { 
+    this.randomNumberSender = new Observable(sender => sender.next(Math.random()));
+  }
 
 
   sample(): void {
@@ -15,7 +22,20 @@ export class RegisterService {
   }
 
   generateRandomNumber() : void {
-    this.randomNumberSender = new Observable(sender => sender.next(Math.random()));
+    this.randomNumberSubject.next(Math.random());
+  }
+
+  getText() : Observable<string> {
+    const url = "http://localhost:8080/user/test";
+    return this.http.get(url,{
+      responseType: 'text'
+    });
+  }
+
+  sendDetails(registrationRequest : RegistrationRequest) : Observable<RegistrationResponse> {
+    return this.http.post<RegistrationResponse>("http://localhost:8080/user/create", registrationRequest, {
+      responseType: 'json'
+    });
   }
 
 
