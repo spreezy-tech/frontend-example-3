@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RegistrationRequest } from '../model/registration-request';
 import { RegistrationResponse } from '../model/registration-response';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -26,14 +27,14 @@ export class RegisterService {
   }
 
   getText() : Observable<string> {
-    const url = "http://localhost:8080/user/test";
+    const url = environment.backendURL + environment.api.test;
     return this.http.get(url,{
       responseType: 'text'
     });
   }
 
   sendDetails(registrationRequest : RegistrationRequest) : Observable<RegistrationResponse> {
-    return this.http.post<RegistrationResponse>("http://localhost:8080/user/create", registrationRequest, {
+    return this.http.post<RegistrationResponse>(environment.backendURL + environment.api.userCreate, registrationRequest, {
       responseType: 'json'
     });
   }
